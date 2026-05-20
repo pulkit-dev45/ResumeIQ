@@ -491,85 +491,93 @@
         }
     });
 
-    async function handleSignup() {
-        const btn      = document.getElementById('signupBtn');
-        const username = document.getElementById('username');
-        const email = document.getElementById('email');
-        const password = document.getElementById('password');
-        const password2 = document.getElementById('password2');
-        const apiError = document.getElementById('apiError');
 
-        // reset
-        [username, email, password, password2].forEach(el => el.classList.remove('invalid'));
-        document.querySelectorAll('.field-error').forEach(el => el.classList.remove('show'));
-        apiError.classList.remove('show');
+async function handleSignup() {
+    const btn = document.getElementById('signupBtn');
+    const username = document.getElementById('username');
+    const email = document.getElementById('email');
+    const password = document.getElementById('password');
+    const password2 = document.getElementById('password2');
+    const apiError = document.getElementById('apiError');
 
-        // client-side validation
-        let valid = true;
+    // reset UI
+    [username, email, password, password2].forEach(el => el.classList.remove('invalid'));
+    document.querySelectorAll('.field-error').forEach(el => el.classList.remove('show'));
+    apiError.classList.remove('show');
 
-        if (!username.value.trim()) {
-            username.classList.add('invalid');
-            document.getElementById('err-username').classList.add('show');
-            valid = false;
-        }
-        if (!email.value.trim()) {
-            username.classList.add('invalid');
-            document.getElementById('err-email').classList.add('show');
-            valid = false;
-        }
+    let valid = true;
 
-        if (password.value.length < 8) {
-            password.classList.add('invalid');
-            document.getElementById('err-password').classList.add('show');
-            valid = false;
-        }
+    if (!username.value.trim()) {
+        username.classList.add('invalid');
+        document.getElementById('err-username').classList.add('show');
+        valid = false;
+    }
 
-        if (!password2.value || password2.value !== password.value) {
-            password2.classList.add('invalid');
-            document.getElementById('err-password2').classList.add('show');
-            valid = false;
-        }
+    if (!email.value.trim()) {
+        email.classList.add('invalid');
+        document.getElementById('err-email').classList.add('show');
+        valid = false;
+    }
 
-        if (!valid) return;
+    if (password.value.length < 8) {
+        password.classList.add('invalid');
+        document.getElementById('err-password').classList.add('show');
+        valid = false;
+    }
 
-        btn.classList.add('loading');
-        btn.disabled = true;
+    if (!password2.value || password2.value !== password.value) {
+        password2.classList.add('invalid');
+        document.getElementById('err-password2').classList.add('show');
+        valid = false;
+    }
 
+    if (!valid) return;
+
+    btn.classList.add('loading');
+    btn.disabled = true;
+
+    try {
+        const res = await fetch('/register/api/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken'),
+            },
+            body: JSON.stringify({
+                username: username.value.trim(),
+                email: email.value.trim(),
+                password: password.value,
+                password2: password2.value,
+            }),
+        });
+
+        let data;
         try {
-            const res = await fetch('/register/api/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': getCookie('csrftoken'),
-                },
-                body: JSON.stringify({
-                    username: username.value.trim(),
-                    email: email.value.trim(),
-                    password: password.value,
-                    password2: password2.value,
-                }),
-            });
+            data = await res.json();
+        } catch (e) {
+            throw new Error("Invalid server response");
+        }
 
-            const data = await res.json();
-
-            if (data.error) {
-                apiError.textContent = data.error;
-                apiError.classList.add('show');
-                btn.classList.remove('loading');
-                btn.disabled = false;
-                return;
-            }
-
-            // success — redirect to home
-            window.location.href = '/';
-
-        } catch (err) {
-            apiError.textContent = 'Something went wrong. Please try again.';
+        // ❗ IMPORTANT: check HTTP status ALSO
+        if (!res.ok) {
+            apiError.textContent = data.error || "Signup failed";
             apiError.classList.add('show');
             btn.classList.remove('loading');
             btn.disabled = false;
+            return;
         }
+
+        // success
+        window.location.href = '/login/';
+
+    } catch (err) {
+        apiError.textContent = err.message || 'Something went wrong. Please try again.';
+        apiError.classList.add('show');
+        btn.classList.remove('loading');
+        btn.disabled = false;
     }
+}
+
 </script>
 </body>
 </html>

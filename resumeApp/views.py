@@ -201,22 +201,31 @@ class Resumeanalyzing(APIView):
             return Response({"error": "Service temporarily unavailable. Please try again later."}, status=503)
         
 class Register(APIView):
-    def post(self,request):
-        username=request.data.get("username")
-        email=request.data.get("email")
-        password=request.data.get("password")
-        password2=request.data.get("password2")
+    def post(self, request):
+        username = request.data.get("username")
+        email = request.data.get("email")
+        password = request.data.get("password")
+        password2 = request.data.get("password2")
+
+        if not username:
+            return Response({"error": "Username required"}, status=400)
+
         if User.objects.filter(username=username).exists():
-            return Response({"error":"Username already exists"})
+            return Response({"error": "Username already exists"}, status=400)
+
         if User.objects.filter(email=email).exists():
-            return Response({"error":"Email already exists"})
-        if password!=password2:
-            return Response({"error":"Confirm password does not match"})
-        user=User.objects.create_user(username=username,password=password,email=email)
-        if user is not None:
-            login(request,user)
-            send_welcome_email(user)
-        return Response({"message":"Register successfully"})
+            return Response({"error": "Email already exists"}, status=400)
+
+        if password != password2:
+            return Response({"error": "Passwords do not match"}, status=400)
+
+        user = User.objects.create_user(
+            username=username,
+            password=password,
+            email=email
+        )
+        send_welcome_email(user)
+        return Response({"message": "Register successfully"}, status=201)
 @method_decorator(ratelimit(key='ip', rate='5/m', block=True), name='post')        
 class Login(APIView):
     def post(self, request):
