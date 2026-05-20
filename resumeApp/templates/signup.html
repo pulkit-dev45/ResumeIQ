@@ -1,5 +1,4 @@
 {% load static %}
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -549,9 +548,7 @@
                     password2: password2.value,
                 }),
             });
-
             const data = await res.json();
-
             if (data.error) {
                 apiError.textContent = data.error;
                 apiError.classList.add('show');
@@ -559,10 +556,8 @@
                 btn.disabled = false;
                 return;
             }
-
             // success — redirect to home
             window.location.href = '/';
-
         } catch (err) {
             apiError.textContent = 'Something went wrong. Please try again.';
             apiError.classList.add('show');
