@@ -1,0 +1,495 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{% static 'favicon_2.ico' %}" type="image/x-icon">
+    <title>Log in — ResumeIQ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --ink: #0d0d12;
+            --ink-2: #3a3a48;
+            --ink-3: #7a7a90;
+            --surface: #ffffff;
+            --surface-2: #f7f7fb;
+            --surface-3: #efeff7;
+            --accent: #5b4ef8;
+            --accent-light: #ede9ff;
+            --accent-dark: #3d30d6;
+            --green: #1bba78;
+            --green-light: #e2fbf1;
+            --border: rgba(0,0,0,0.08);
+            --radius: 14px;
+            --radius-lg: 22px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--surface-2);
+            color: var(--ink);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            height: 66px;
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-logo {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 1.25rem;
+            color: var(--ink);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-logo span { color: var(--accent); }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-right span {
+            font-size: 0.875rem;
+            color: var(--ink-3);
+        }
+
+        .nav-right a {
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            padding: 8px 18px;
+            border-radius: 10px;
+            background: var(--accent);
+            color: #fff;
+            transition: background 0.2s;
+        }
+
+        .nav-right a:hover { background: var(--accent-dark); }
+
+        .page {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 20px 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page::before {
+            content: '';
+            position: absolute;
+            top: -100px; left: 50%;
+            transform: translateX(-50%);
+            width: 700px; height: 700px;
+            background: radial-gradient(ellipse at center, rgba(91,78,248,0.06) 0%, transparent 65%);
+            pointer-events: none;
+        }
+
+        .auth-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 48px 44px;
+            width: 100%;
+            max-width: 440px;
+            box-shadow: 0 4px 40px rgba(0,0,0,0.07);
+            position: relative;
+        }
+
+        .auth-card-header { margin-bottom: 36px; }
+
+        .auth-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            background: var(--accent-light);
+            color: var(--accent);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            padding: 5px 13px;
+            border-radius: 100px;
+            margin-bottom: 20px;
+        }
+
+        .auth-badge .dot {
+            width: 5px; height: 5px;
+            border-radius: 50%;
+            background: var(--accent);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.8); }
+        }
+
+        .auth-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.9rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            color: var(--ink);
+            line-height: 1.1;
+            margin-bottom: 8px;
+        }
+
+        .auth-title em { font-style: normal; color: var(--accent); }
+
+        .auth-sub {
+            font-size: 0.9rem;
+            color: var(--ink-3);
+            line-height: 1.6;
+        }
+
+        .field { margin-bottom: 20px; }
+
+        .field label {
+            display: block;
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--ink-2);
+            margin-bottom: 8px;
+        }
+
+        .input-wrap { position: relative; }
+
+        .input-wrap input {
+            width: 100%;
+            padding: 13px 16px 13px 44px;
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem;
+            color: var(--ink);
+            background: var(--surface-2);
+            outline: none;
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        .input-wrap input:focus {
+            border-color: var(--accent);
+            background: var(--surface);
+        }
+
+        .input-wrap input::placeholder { color: var(--ink-3); }
+        .input-wrap input.invalid { border-color: #e74c3c; }
+
+        .input-icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1rem;
+            pointer-events: none;
+            opacity: 0.45;
+        }
+
+        .toggle-pw {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            opacity: 0.4;
+            transition: opacity 0.2s;
+            padding: 0;
+            line-height: 1;
+        }
+
+        .toggle-pw:hover { opacity: 0.8; }
+
+        .field-error {
+            font-size: 0.78rem;
+            color: #c0392b;
+            margin-top: 6px;
+            display: none;
+        }
+
+        .field-error.show { display: block; }
+
+        /* server error banner */
+        .api-error {
+            background: #fde8e8;
+            border: 1px solid rgba(224,60,60,0.2);
+            border-radius: var(--radius);
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            font-size: 0.875rem;
+            color: #b02020;
+            display: none;
+        }
+
+        .api-error.show { display: block; }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: var(--radius);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: background 0.2s, transform 0.15s;
+            margin-top: 8px;
+        }
+
+        .submit-btn:hover { background: var(--accent-dark); }
+        .submit-btn:active { transform: scale(0.99); }
+        .submit-btn .btn-text { transition: opacity 0.2s; }
+        .submit-btn.loading .btn-text { opacity: 0; }
+
+        .btn-loader {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .submit-btn.loading .btn-loader { opacity: 1; }
+
+        .spinner {
+            width: 20px; height: 20px;
+            border: 2.5px solid rgba(255,255,255,0.35);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 0.75s linear infinite;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .auth-footer {
+            text-align: center;
+            margin-top: 28px;
+            font-size: 0.875rem;
+            color: var(--ink-3);
+        }
+
+        .auth-footer a {
+            color: var(--accent);
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        .auth-footer a:hover { text-decoration: underline; }
+
+        .divider-line {
+            width: 40px; height: 3px;
+            background: var(--accent);
+            border-radius: 4px;
+            margin: 16px 0 0;
+        }
+
+        footer {
+            background: var(--ink);
+            color: rgba(255,255,255,0.5);
+            padding: 36px 5%;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .footer-logo span { color: var(--accent); }
+        .footer-copy { font-size: 0.8rem; margin-top: 10px; }
+
+        @media (max-width: 500px) {
+            .auth-card { padding: 36px 24px; }
+            nav { padding: 0 4%; }
+            .nav-logo { font-size: 1.05rem; }
+            .nav-right span { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="/" class="nav-logo">Resume<span>IQ</span></a>
+    <div class="nav-right">
+        <span>No account?</span>
+        <a href="/signup/">Sign up free</a>
+    </div>
+</nav>
+
+<div class="page">
+    <div class="auth-card">
+
+        <div class="auth-card-header">
+            <div class="auth-badge"><span class="dot"></span> Welcome back</div>
+            <h1 class="auth-title">Log in to<br><em>ResumeIQ</em></h1>
+            <div class="divider-line"></div>
+            <p class="auth-sub" style="margin-top:14px">Enter your credentials to continue.</p>
+        </div>
+
+        <!-- API error banner -->
+        <div class="api-error" id="apiError"></div>
+
+        <div class="field">
+            <label for="username">Username</label>
+            <div class="input-wrap">
+                <span class="input-icon">👤</span>
+                <input type="text" id="username" placeholder="Enter your username" autocomplete="username">
+            </div>
+            <div class="field-error" id="err-username">Please enter your username.</div>
+        </div>
+
+        <div class="field">
+            <label for="password">Password</label>
+            <div class="input-wrap">
+                <span class="input-icon">🔒</span>
+                <input type="password" id="password" placeholder="Enter your password" autocomplete="current-password">
+                <button type="button" class="toggle-pw" onclick="togglePw('password', this)">👁</button>
+            </div>
+            <div class="field-error" id="err-password">Please enter your password.</div>
+        </div>
+
+        <button class="submit-btn" id="loginBtn" onclick="handleLogin()">
+            <span class="btn-text">Log in →</span>
+            <div class="btn-loader"><div class="spinner"></div></div>
+        </button>
+
+        <div class="auth-footer">
+            Don't have an account? <a href="/signup/">Sign up free</a>
+        </div>
+
+    </div>
+</div>
+
+<footer>
+    <a href="/" class="footer-logo">Resume<span>IQ</span></a>
+    <p class="footer-copy">© 2026 ResumeIQ. All rights reserved.</p>
+</footer>
+
+<script>
+    function togglePw(inputId, btn) {
+        const input = document.getElementById(inputId);
+        input.type = input.type === 'password' ? 'text' : 'password';
+        btn.textContent = input.type === 'password' ? '👁' : '🙈';
+    }
+
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
+    async function handleLogin() {
+        const btn       = document.getElementById('loginBtn');
+        const username  = document.getElementById('username');
+        const password  = document.getElementById('password');
+        const apiError  = document.getElementById('apiError');
+
+        // reset
+        [username, password].forEach(el => el.classList.remove('invalid'));
+        document.querySelectorAll('.field-error').forEach(el => el.classList.remove('show'));
+        apiError.classList.remove('show');
+
+        // client-side validation
+        let valid = true;
+        if (!username.value.trim()) {
+            username.classList.add('invalid');
+            document.getElementById('err-username').classList.add('show');
+            valid = false;
+        }
+        if (!password.value) {
+            password.classList.add('invalid');
+            document.getElementById('err-password').classList.add('show');
+            valid = false;
+        }
+        if (!valid) return;
+
+        btn.classList.add('loading');
+        btn.disabled = true;
+
+        try {
+            const res = await fetch('/login/api/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken'),
+                },
+                body: JSON.stringify({
+                    username: username.value.trim(),
+                    password: password.value,
+                }),
+            });
+            if (res.status === 403) {
+                apiError.textContent = "Too many attempts.Try again after some time.";
+                apiError.classList.add('show');
+                btn.classList.remove('loading');
+                btn.disabled = false;
+                return;
+            }
+            console.log(res.status);
+            const data = await res.json();
+            if (data.error) {
+                apiError.textContent = data.error;
+                apiError.classList.add('show');
+                btn.classList.remove('loading');
+                btn.disabled = false;
+                return;
+            }
+            
+            // success — redirect to home
+            
+            window.location.href = '/';
+
+
+        } catch (err) {
+            apiError.textContent = 'Something went wrong. Please try again.';
+            apiError.classList.add('show');
+            btn.classList.remove('loading');
+            btn.disabled = false;
+        }
+    }
+
+    // allow Enter key to submit
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') handleLogin();
+    });
+</script>
+
+</body>
+</html>

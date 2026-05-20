@@ -1,0 +1,277 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{% static 'favicon_2.ico' %}" type="image/x-icon">
+    <title>Privacy Policy — ResumeIQ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --ink: #0d0d12;
+            --ink-2: #3a3a48;
+            --ink-3: #7a7a90;
+            --surface: #ffffff;
+            --surface-2: #f7f7fb;
+            --accent: #5b4ef8;
+            --accent-light: #ede9ff;
+            --accent-dark: #3d30d6;
+            --green: #1bba78;
+            --border: rgba(0,0,0,0.08);
+            --radius: 14px;
+            --radius-lg: 22px;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--surface-2);
+            color: var(--ink);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            height: 66px;
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-logo {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 1.25rem;
+            color: var(--ink);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-logo span { color: var(--accent); }
+
+        .nav-back {
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--ink-2);
+            padding: 8px 16px;
+            border-radius: 10px;
+            border: 1.5px solid var(--border);
+            transition: background 0.2s;
+        }
+
+        .nav-back:hover { background: var(--surface-2); }
+
+        .page {
+            flex: 1;
+            max-width: 760px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 110px 24px 80px;
+        }
+
+        .page-header { margin-bottom: 48px; }
+
+        .page-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            background: var(--accent-light);
+            color: var(--accent);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            padding: 5px 13px;
+            border-radius: 100px;
+            margin-bottom: 20px;
+        }
+
+        .page-header h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            color: var(--ink);
+            line-height: 1.1;
+        }
+
+        .page-header h1 em { font-style: normal; color: var(--accent); }
+
+        .divider-line {
+            width: 40px; height: 3px;
+            background: var(--accent);
+            border-radius: 4px;
+            margin: 16px 0 20px;
+        }
+
+        .page-header p {
+            font-size: 0.95rem;
+            color: var(--ink-3);
+            line-height: 1.7;
+        }
+
+        .section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 28px 32px;
+            margin-bottom: 16px;
+        }
+
+        .section h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--ink);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 26px; height: 26px;
+            background: var(--accent-light);
+            color: var(--accent);
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .section p {
+            font-size: 0.9rem;
+            color: var(--ink-2);
+            line-height: 1.7;
+        }
+
+        .section ul { list-style: none; margin-top: 10px; }
+
+        .section ul li {
+            font-size: 0.9rem;
+            color: var(--ink-2);
+            padding: 7px 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            line-height: 1.5;
+        }
+
+        .section ul li:last-child { border-bottom: none; }
+
+        .section ul li::before {
+            content: '✓';
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+
+        footer {
+            background: var(--ink);
+            color: rgba(255,255,255,0.5);
+            padding: 36px 5%;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .footer-logo span { color: var(--accent); }
+        .footer-copy { font-size: 0.8rem; margin-top: 10px; }
+
+        @media (max-width: 500px) {
+            .section { padding: 22px 20px; }
+            nav { padding: 0 4%; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="/" class="nav-logo">Resume<span>IQ</span></a>
+    <a href="/" class="nav-back">← Back to home</a>
+</nav>
+
+<div class="page">
+
+    <div class="page-header">
+        <div class="page-badge">Legal</div>
+        <h1>Privacy <em>Policy</em></h1>
+        <div class="divider-line"></div>
+        <p>Your privacy is important to us. This policy explains how we collect and use your data.</p>
+    </div>
+
+    <div class="section">
+        <h2><span class="section-num">1</span> Information We Collect</h2>
+        <ul>
+            <li>Personal details (name, email)</li>
+            <li>Uploaded resumes</li>
+            <li>Usage data</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2><span class="section-num">2</span> How We Use Data</h2>
+        <ul>
+            <li>To provide resume analysis services</li>
+            <li>To improve our AI system</li>
+            <li>To communicate updates</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2><span class="section-num">3</span> Data Security</h2>
+        <p>We implement security measures to protect your data.</p>
+    </div>
+
+    <div class="section">
+        <h2><span class="section-num">4</span> Third-Party Services</h2>
+        <p>Payments are processed via secure third-party providers. We do not store payment details.</p>
+    </div>
+
+    <div class="section">
+        <h2><span class="section-num">5</span> Data Sharing</h2>
+        <p>We do not sell or share your personal data with third parties.</p>
+    </div>
+
+    <div class="section">
+        <h2><span class="section-num">6</span> User Rights</h2>
+        <p>You can request deletion of your data anytime.</p>
+    </div>
+
+    <div class="section">
+        <h2><span class="section-num">7</span> Changes</h2>
+        <p>We may update this policy from time to time.</p>
+    </div>
+
+</div>
+
+<footer>
+    <a href="/" class="footer-logo">Resume<span>IQ</span></a>
+    <p class="footer-copy">© 2025 ResumeIQ. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
