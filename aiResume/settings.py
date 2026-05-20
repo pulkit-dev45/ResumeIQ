@@ -112,7 +112,7 @@ import os
 env_path = os.path.join(BASE_DIR, '.env')
 
 
-config = Config(RepositoryEnv(env_path))
+from decouple import config
 
 RAZORPAY_KEY_ID = config("RAZORPAY_KEY_ID")
 RAZORPAY_KEY_SECRET = config("RAZORPAY_KEY_SECRET")
