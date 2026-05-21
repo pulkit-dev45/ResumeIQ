@@ -36,9 +36,9 @@ resend.api_key = settings.RESEND_API_KEY
 def send_welcome_email(user):
     try:
         resend.Emails.send({
-            "from": "ResumeIQ <onboarding@resend.dev>",
+            "from": "ResumeTC <onboarding@resend.dev>",
             "to": user.email,
-            "subject": "You're in! Welcome to ResumeIQ",
+            "subject": "You're in! Welcome to ResumeTC",
             "html": f"""
 <!DOCTYPE html>
 <html>
@@ -54,7 +54,7 @@ def send_welcome_email(user):
         <!-- Header -->
         <tr>
           <td style="background:#1a1a2e;padding:32px 40px;text-align:center;">
-            <h1 style="margin:0;color:#ffffff;font-size:24px;font-weight:700;letter-spacing:-0.5px;">ResumeIQ</h1>
+            <h1 style="margin:0;color:#ffffff;font-size:24px;font-weight:700;letter-spacing:-0.5px;">ResumeTC</h1>
             <p style="margin:8px 0 0;color:#a0a0b8;font-size:14px;">AI-Powered Resume Analyzer</p>
           </td>
         </tr>
@@ -63,7 +63,7 @@ def send_welcome_email(user):
         <tr>
           <td style="padding:40px 40px 24px;">
             <h2 style="margin:0 0 12px;font-size:28px;font-weight:700;color:#1a1a2e;line-height:1.3;">Hey {user.username}, you're officially in! </h2>
-            <p style="margin:0;font-size:16px;color:#555;line-height:1.7;">Welcome to <strong>ResumeIQ</strong> — the smartest way to get your resume noticed by recruiters and ATS systems.</p>
+            <p style="margin:0;font-size:16px;color:#555;line-height:1.7;">Welcome to <strong>ResumeTC</strong> — the smartest way to get your resume noticed by recruiters and ATS systems.</p>
           </td>
         </tr>
 
@@ -122,7 +122,7 @@ def send_welcome_email(user):
         <!-- CTA -->
         <tr>
           <td style="padding:8px 40px 40px;text-align:center;">
-            <a href="https://resumeiq-orn7.onrender.com" style="display:inline-block;background:#1a1a2e;color:#ffffff;text-decoration:none;font-size:15px;font-weight:600;padding:14px 36px;border-radius:8px;letter-spacing:0.2px;">Analyze my resume now</a>
+            <a href="https://ResumeTC-orn7.onrender.com" style="display:inline-block;background:#1a1a2e;color:#ffffff;text-decoration:none;font-size:15px;font-weight:600;padding:14px 36px;border-radius:8px;letter-spacing:0.2px;">Analyze my resume now</a>
           </td>
         </tr>
 
@@ -132,8 +132,8 @@ def send_welcome_email(user):
         <!-- Footer -->
         <tr>
           <td style="padding:24px 40px;text-align:center;">
-            <p style="margin:0;font-size:13px;color:#aaa;line-height:1.6;">You're receiving this because you signed up at ResumeIQ.<br>Questions? Just reply to this email — we read every one.</p>
-            <p style="margin:12px 0 0;font-size:13px;color:#aaa;">— Team ResumeIQ</p>
+            <p style="margin:0;font-size:13px;color:#aaa;line-height:1.6;">You're receiving this because you signed up at ResumeTC.<br>Questions? Just reply to this email — we read every one.</p>
+            <p style="margin:12px 0 0;font-size:13px;color:#aaa;">— Team ResumeTC</p>
           </td>
         </tr>
 
@@ -151,7 +151,7 @@ def send_welcome_email(user):
 def send_purchase_email(user):
     try:
         resend.Emails.send({
-            "from": "ResumeIQ <onboarding@resend.dev>",
+            "from": "ResumeTC <onboarding@resend.dev>",
             "to": user.email,
             "subject": f"Payment confirmed — {user.profile.plan} plan is active!",
             "html": f"""
@@ -169,7 +169,7 @@ def send_purchase_email(user):
         <!-- Header -->
         <tr>
           <td style="background:#1a1a2e;padding:32px 40px;text-align:center;">
-            <h1 style="margin:0;color:#ffffff;font-size:24px;font-weight:700;letter-spacing:-0.5px;">ResumeIQ</h1>
+            <h1 style="margin:0;color:#ffffff;font-size:24px;font-weight:700;letter-spacing:-0.5px;">ResumeTC</h1>
             <p style="margin:8px 0 0;color:#a0a0b8;font-size:14px;">AI-Powered Resume Analyzer</p>
           </td>
         </tr>
@@ -217,7 +217,7 @@ def send_purchase_email(user):
         <!-- CTA -->
         <tr>
           <td style="padding:8px 40px 40px;text-align:center;">
-            <a href="https://resumeiq-orn7.onrender.com" style="display:inline-block;background:#1a1a2e;color:#ffffff;text-decoration:none;font-size:15px;font-weight:600;padding:14px 36px;border-radius:8px;">Start analyzing now</a>
+            <a href="https://ResumeTC-orn7.onrender.com" style="display:inline-block;background:#1a1a2e;color:#ffffff;text-decoration:none;font-size:15px;font-weight:600;padding:14px 36px;border-radius:8px;">Start analyzing now</a>
           </td>
         </tr>
 
@@ -228,7 +228,7 @@ def send_purchase_email(user):
         <tr>
           <td style="padding:24px 40px;text-align:center;">
             <p style="margin:0;font-size:13px;color:#aaa;line-height:1.6;">Questions about your plan? Just reply — we're happy to help.</p>
-            <p style="margin:12px 0 0;font-size:13px;color:#aaa;">— Team ResumeIQ</p>
+            <p style="margin:12px 0 0;font-size:13px;color:#aaa;">— Team ResumeTC</p>
           </td>
         </tr>
 

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ResumeIQ — AI-Powered Resume Analyzer</title>
+    <title>ResumeTC — AI-Powered Resume Analyzer</title>
     <link rel="icon" href="{% static 'favicon_2.ico' %}" type="image/x-icon">
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1062,7 +1062,7 @@
             <a href="{% url "refund" %}">Refund and Contact</a>
         </div>
     </div>
-    <p class="footer-copy">© 2026 ResumeIQ. Built with care.</p>
+    <p class="footer-copy">© 2026 ResumeTC. Built with care.</p>
 </footer>
 
 <!-- ── TOAST ── -->
@@ -1197,7 +1197,7 @@
                 key: 'rzp_test_SDyjNR2cDDfJAh',
                 amount: order.amount,
                 currency: order.currency,
-                name: 'ResumeIQ',
+                name: 'ResumeTC',
                 description: amount === 49 ? 'Starter Plan' : 'Pro Plan',
                 order_id: order.id,
                 handler: function(response) {

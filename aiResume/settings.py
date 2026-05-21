@@ -137,7 +137,7 @@ CSRF_TRUSTED_ORIGINS = [
 pythonSESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 CORS_ALLOWED_ORIGINS = [
-    "https://resumeiq-orn7.onrender.com",
+    "https://ResumeTC-orn7.onrender.com",
     "http://localhost:8000",
 ]
 
