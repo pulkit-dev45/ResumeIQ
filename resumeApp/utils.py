@@ -122,7 +122,7 @@ def send_welcome_email(user):
         <!-- CTA -->
         <tr>
           <td style="padding:8px 40px 40px;text-align:center;">
-            <a href="https://ResumeTC-orn7.onrender.com" style="display:inline-block;background:#1a1a2e;color:#ffffff;text-decoration:none;font-size:15px;font-weight:600;padding:14px 36px;border-radius:8px;letter-spacing:0.2px;">Analyze my resume now</a>
+            <a href="https://resumetc.onrender.com/" style="display:inline-block;background:#1a1a2e;color:#ffffff;text-decoration:none;font-size:15px;font-weight:600;padding:14px 36px;border-radius:8px;letter-spacing:0.2px;">Analyze my resume now</a>
           </td>
         </tr>
 
@@ -217,7 +217,7 @@ def send_purchase_email(user):
         <!-- CTA -->
         <tr>
           <td style="padding:8px 40px 40px;text-align:center;">
-            <a href="https://ResumeTC-orn7.onrender.com" style="display:inline-block;background:#1a1a2e;color:#ffffff;text-decoration:none;font-size:15px;font-weight:600;padding:14px 36px;border-radius:8px;">Start analyzing now</a>
+            <a href="https://resumetc.onrender.com/" style="display:inline-block;background:#1a1a2e;color:#ffffff;text-decoration:none;font-size:15px;font-weight:600;padding:14px 36px;border-radius:8px;">Start analyzing now</a>
           </td>
         </tr>
 
