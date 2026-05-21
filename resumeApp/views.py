@@ -24,8 +24,9 @@ from rest_framework.authentication import SessionAuthentication
 class CsrfExemptSessionAuthentication(SessionAuthentication):
     def enforce_csrf(self, request):
         return
-    
-import google as genai
+import warnings
+warnings.filterwarnings("ignore", category=FutureWarning)    
+import google.generativeai as genai
 genai.configure(api_key=settings.GEMINI_API_KEY)
 model=genai.GenerativeModel("gemini-2.5-flash")
 
