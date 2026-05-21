@@ -31,32 +31,35 @@ def parsingDocx(file):
 from django.core.mail import send_mail
 
 def send_welcome_email(user):
-    send_mail(
-        subject="🚀 Welcome to Resume AI – Let’s build your future!",
-        message=f"""
-Hey {user.username} 👋
+    try:
+        send_mail(
+            subject="🚀 Welcome to Resume AI – Let’s build your future!",
+            message=f"""
+    Hey {user.username} 👋
 
-Welcome to Resume AI 🎉
+    Welcome to Resume AI 🎉
 
-We’re super excited to have you on board.
+    We’re super excited to have you on board.
 
-Here’s what you can do now:
-✔ Upload your resume
-✔ Get AI-powered ATS score
-✔ Improve your chances of getting hired
+    Here’s what you can do now:
+    ✔ Upload your resume
+    ✔ Get AI-powered ATS score
+    ✔ Improve your chances of getting hired
 
-We built this tool to help you crack interviews faster and smarter 🚀
+    We built this tool to help you crack interviews faster and smarter 🚀
 
-If you ever need help, just reach out — we’ve got your back.
+    If you ever need help, just reach out — we’ve got your back.
 
-Let’s build your career together 💼🔥
+    Let’s build your career together 💼🔥
 
-– Team ResumeIQ
-""",
-        from_email=settings.EMAIL_HOST_USER,
-        recipient_list=[user.email],
-        fail_silently=False,
-    )
+    – Team ResumeIQ
+    """,
+            from_email=settings.EMAIL_HOST_USER,
+            recipient_list=[user.email],
+            fail_silently=False,
+        )
+    except Exception as e:
+        print(f"Email failed: {e}")
 
 
 

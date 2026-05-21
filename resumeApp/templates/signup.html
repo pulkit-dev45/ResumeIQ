@@ -557,33 +557,47 @@ async function handleSignup() {
 
         let data;
         try {
-            data = await res.json();
-        } catch(e) {
-            const rawText = await res.text(); // see what Django actually returned
-            console.error('Raw response:', rawText);
-            throw new Error("Server returned non-JSON: " + rawText.substring(0, 100));
-        }
-        
+    const res = await fetch('/register/api/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken'),
+        },
+        body: JSON.stringify({
+            username: username.value.trim(),
+            email: email.value.trim(),
+            password: password.value,
+            password2: password2.value,
+        }),
+    });
 
-        // ❗ IMPORTANT: check HTTP status ALSO
-        if (!res.ok) {
-            apiError.textContent = data.error || "Signup failed";
-            apiError.classList.add('show');
-            btn.classList.remove('loading');
-            btn.disabled = false;
-            return;
-        }
-        // success
-        window.location.href = '/login/';
+    // Pehle text lo, phir parse karo
+    const rawText = await res.text();
+    console.log('Raw response:', rawText);
 
-    } catch(err) {
-        console.error('Full error:', err);
-        console.error('Response status:', res?.status);
-        apiError.textContent = err.message || 'Something went wrong. Please try again.';
-        apiError.classList.add('show');
-        btn.classList.remove('loading');
-        btn.disabled = false;
+    let data;
+    try {
+        data = JSON.parse(rawText);
+    } catch(e) {
+        // 500 error = Django ne HTML bheja
+        throw new Error("Server error (500) - Check Render logs");
     }
+
+    if (!res.ok) {
+        apiError.textContent = data.error || "Signup failed";
+        apiError.classList.add('show');
+        return;
+    }
+
+    window.location.href = '/login/';
+
+} catch(err) {
+    apiError.textContent = err.message || 'Something went wrong.';
+    apiError.classList.add('show');
+} finally {
+    btn.classList.remove('loading');
+    btn.disabled = false;
+}
 }
 </script>
 </body>
