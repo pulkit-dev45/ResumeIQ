@@ -111,7 +111,7 @@ from decouple import config
 RAZORPAY_KEY_ID = config("RAZORPAY_KEY_ID")
 RAZORPAY_KEY_SECRET = config("RAZORPAY_KEY_SECRET")
 GEMINI_API_KEY = config("GEMINI_API_KEY")
-
+RESEND_API_KEY = config("RESEND_API_KEY")
 SECRET_KEY = config("DJANGO_SECRET_KEY")
 DEBUG = config("DEBUG", default=False, cast=bool)
 
@@ -121,12 +121,7 @@ REST_FRAMEWORK = {
     ]
 }
 
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = "smtp.gmail.com"
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER =config("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD =config("EMAIL_HOST_PASSWORD")
+
 
 # SECURE_SSL_REDIRECT = False
 # SESSION_COOKIE_SECURE = False
