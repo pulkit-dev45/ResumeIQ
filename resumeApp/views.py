@@ -25,7 +25,7 @@ class CsrfExemptSessionAuthentication(SessionAuthentication):
     def enforce_csrf(self, request):
         return
     
-import google.generativeai as genai
+import google as genai
 genai.configure(api_key=settings.GEMINI_API_KEY)
 model=genai.GenerativeModel("gemini-2.5-flash")
 
