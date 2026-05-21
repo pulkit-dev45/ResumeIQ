@@ -38,26 +38,110 @@ def send_welcome_email(user):
         resend.Emails.send({
             "from": "ResumeIQ <onboarding@resend.dev>",
             "to": user.email,
-            "subject": "🚀 Welcome to Resume AI – Let's build your future!",
-            "text": f"""
-Hey {user.username} 👋
+            "subject": "You're in! Welcome to ResumeIQ",
+            "html": f"""
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="margin:0;padding:0;background:#f4f4f5;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f4f4f5;padding:40px 0;">
+    <tr><td align="center">
+      <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:12px;overflow:hidden;max-width:600px;width:100%;">
+        
+        <!-- Header -->
+        <tr>
+          <td style="background:#1a1a2e;padding:32px 40px;text-align:center;">
+            <h1 style="margin:0;color:#ffffff;font-size:24px;font-weight:700;letter-spacing:-0.5px;">ResumeIQ</h1>
+            <p style="margin:8px 0 0;color:#a0a0b8;font-size:14px;">AI-Powered Resume Analyzer</p>
+          </td>
+        </tr>
 
-Welcome to Resume AI 🎉
+        <!-- Hero -->
+        <tr>
+          <td style="padding:40px 40px 24px;">
+            <h2 style="margin:0 0 12px;font-size:28px;font-weight:700;color:#1a1a2e;line-height:1.3;">Hey {user.username}, you're officially in! </h2>
+            <p style="margin:0;font-size:16px;color:#555;line-height:1.7;">Welcome to <strong>ResumeIQ</strong> — the smartest way to get your resume noticed by recruiters and ATS systems.</p>
+          </td>
+        </tr>
 
-We're super excited to have you on board.
+        <!-- Divider -->
+        <tr><td style="padding:0 40px;"><div style="height:1px;background:#f0f0f0;"></div></td></tr>
 
-Here's what you can do now:
-✔ Upload your resume
-✔ Get AI-powered ATS score
-✔ Improve your chances of getting hired
+        <!-- Features -->
+        <tr>
+          <td style="padding:28px 40px;">
+            <p style="margin:0 0 20px;font-size:15px;font-weight:600;color:#1a1a2e;">Here's what you can do right now:</p>
+            
+            <table cellpadding="0" cellspacing="0" width="100%">
+              <tr>
+                <td style="padding:12px 0;border-bottom:1px solid #f5f5f5;">
+                  <table cellpadding="0" cellspacing="0">
+                    <tr>
+                      <td style="width:36px;height:36px;background:#eef2ff;border-radius:8px;text-align:center;vertical-align:middle;font-size:18px;">📄</td>
+                      <td style="padding-left:14px;">
+                        <p style="margin:0;font-size:15px;font-weight:600;color:#1a1a2e;">Upload your resume</p>
+                        <p style="margin:2px 0 0;font-size:13px;color:#888;">PDF or Word — we handle both</p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td style="padding:12px 0;border-bottom:1px solid #f5f5f5;">
+                  <table cellpadding="0" cellspacing="0">
+                    <tr>
+                      <td style="width:36px;height:36px;background:#f0fdf4;border-radius:8px;text-align:center;vertical-align:middle;font-size:18px;">🎯</td>
+                      <td style="padding-left:14px;">
+                        <p style="margin:0;font-size:15px;font-weight:600;color:#1a1a2e;">Get your ATS score</p>
+                        <p style="margin:2px 0 0;font-size:13px;color:#888;">See exactly how recruiters see you</p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td style="padding:12px 0;">
+                  <table cellpadding="0" cellspacing="0">
+                    <tr>
+                      <td style="width:36px;height:36px;background:#fff7ed;border-radius:8px;text-align:center;vertical-align:middle;font-size:18px;">🚀</td>
+                      <td style="padding-left:14px;">
+                        <p style="margin:0;font-size:15px;font-weight:600;color:#1a1a2e;">Get AI suggestions</p>
+                        <p style="margin:2px 0 0;font-size:13px;color:#888;">Improve your resume with one click</p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
 
-We built this tool to help you crack interviews faster and smarter 🚀
+        <!-- CTA -->
+        <tr>
+          <td style="padding:8px 40px 40px;text-align:center;">
+            <a href="https://resumeiq-orn7.onrender.com" style="display:inline-block;background:#1a1a2e;color:#ffffff;text-decoration:none;font-size:15px;font-weight:600;padding:14px 36px;border-radius:8px;letter-spacing:0.2px;">Analyze my resume now</a>
+          </td>
+        </tr>
 
-If you ever need help, just reach out — we've got your back.
+        <!-- Divider -->
+        <tr><td style="padding:0 40px;"><div style="height:1px;background:#f0f0f0;"></div></td></tr>
 
-Let's build your career together 💼🔥
+        <!-- Footer -->
+        <tr>
+          <td style="padding:24px 40px;text-align:center;">
+            <p style="margin:0;font-size:13px;color:#aaa;line-height:1.6;">You're receiving this because you signed up at ResumeIQ.<br>Questions? Just reply to this email — we read every one.</p>
+            <p style="margin:12px 0 0;font-size:13px;color:#aaa;">— Team ResumeIQ</p>
+          </td>
+        </tr>
 
-– Team ResumeIQ
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>
 """,
         })
     except Exception as e:
@@ -69,24 +153,90 @@ def send_purchase_email(user):
         resend.Emails.send({
             "from": "ResumeIQ <onboarding@resend.dev>",
             "to": user.email,
-            "subject": f"🎉 Payment Successful – Welcome to {user.profile.plan} Plan!",
-            "text": f"""
-Hey {user.username} 👋
+            "subject": f"Payment confirmed — {user.profile.plan} plan is active!",
+            "html": f"""
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="margin:0;padding:0;background:#f4f4f5;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f4f4f5;padding:40px 0;">
+    <tr><td align="center">
+      <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:12px;overflow:hidden;max-width:600px;width:100%;">
 
-Thank you for purchasing our {user.profile.plan} plan 🚀
+        <!-- Header -->
+        <tr>
+          <td style="background:#1a1a2e;padding:32px 40px;text-align:center;">
+            <h1 style="margin:0;color:#ffffff;font-size:24px;font-weight:700;letter-spacing:-0.5px;">ResumeIQ</h1>
+            <p style="margin:8px 0 0;color:#a0a0b8;font-size:14px;">AI-Powered Resume Analyzer</p>
+          </td>
+        </tr>
 
-Your account has been updated successfully.
+        <!-- Hero -->
+        <tr>
+          <td style="padding:40px 40px 24px;">
+            <h2 style="margin:0 0 12px;font-size:28px;font-weight:700;color:#1a1a2e;">Payment confirmed!</h2>
+            <p style="margin:0;font-size:16px;color:#555;line-height:1.7;">Hey {user.username}, your <strong>{user.profile.plan} plan</strong> is now active. Time to get to work!</p>
+          </td>
+        </tr>
 
-✨ Plan Activated: {user.profile.plan}
-💳 Your total Credits: {user.profile.credits}
+        <!-- Divider -->
+        <tr><td style="padding:0 40px;"><div style="height:1px;background:#f0f0f0;"></div></td></tr>
 
-Now you can start analyzing resumes without limits 🔥
+        <!-- Plan details -->
+        <tr>
+          <td style="padding:28px 40px;">
+            <p style="margin:0 0 16px;font-size:15px;font-weight:600;color:#1a1a2e;">Your plan details:</p>
+            <table cellpadding="0" cellspacing="0" width="100%" style="background:#f8f9ff;border-radius:8px;border:1px solid #e8eaf6;">
+              <tr>
+                <td style="padding:16px 20px;border-bottom:1px solid #e8eaf6;">
+                  <table width="100%" cellpadding="0" cellspacing="0">
+                    <tr>
+                      <td style="font-size:14px;color:#888;">Plan</td>
+                      <td style="text-align:right;font-size:14px;font-weight:600;color:#1a1a2e;">{user.profile.plan}</td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td style="padding:16px 20px;">
+                  <table width="100%" cellpadding="0" cellspacing="0">
+                    <tr>
+                      <td style="font-size:14px;color:#888;">Credits available</td>
+                      <td style="text-align:right;font-size:14px;font-weight:600;color:#1a1a2e;">{user.profile.credits}</td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
 
-We're excited to help you grow your career 💼
+        <!-- CTA -->
+        <tr>
+          <td style="padding:8px 40px 40px;text-align:center;">
+            <a href="https://resumeiq-orn7.onrender.com" style="display:inline-block;background:#1a1a2e;color:#ffffff;text-decoration:none;font-size:15px;font-weight:600;padding:14px 36px;border-radius:8px;">Start analyzing now</a>
+          </td>
+        </tr>
 
-If you need any help, just reply to this email.
+        <!-- Divider -->
+        <tr><td style="padding:0 40px;"><div style="height:1px;background:#f0f0f0;"></div></td></tr>
 
-– Team ResumeIQ
+        <!-- Footer -->
+        <tr>
+          <td style="padding:24px 40px;text-align:center;">
+            <p style="margin:0;font-size:13px;color:#aaa;line-height:1.6;">Questions about your plan? Just reply — we're happy to help.</p>
+            <p style="margin:12px 0 0;font-size:13px;color:#aaa;">— Team ResumeIQ</p>
+          </td>
+        </tr>
+
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>
 """,
         })
     except Exception as e:
