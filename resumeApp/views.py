@@ -199,7 +199,7 @@ class Resumeanalyzing(APIView):
             if "quota" in error_msg:
                 return Response({ "error": "Daily AI limit reached.Try again tomorrow."}, status=503)
             return Response({"error": "Service temporarily unavailable. Please try again later."}, status=503)
-        
+@method_decorator(csrf_exempt, name='dispatch')        
 class Register(APIView):
     def post(self, request):
         username = request.data.get("username")

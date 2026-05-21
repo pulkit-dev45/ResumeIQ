@@ -551,12 +551,19 @@ async function handleSignup() {
             }),
         });
 
+        
+
+        console.log('Status:', res.status, 'Content-Type:', res.headers.get('content-type'));
+
         let data;
         try {
             data = await res.json();
-        } catch (e) {
-            throw new Error("Invalid server response");
+        } catch(e) {
+            const rawText = await res.text(); // see what Django actually returned
+            console.error('Raw response:', rawText);
+            throw new Error("Server returned non-JSON: " + rawText.substring(0, 100));
         }
+        
 
         // ❗ IMPORTANT: check HTTP status ALSO
         if (!res.ok) {
@@ -566,18 +573,18 @@ async function handleSignup() {
             btn.disabled = false;
             return;
         }
-
         // success
         window.location.href = '/login/';
 
-    } catch (err) {
+    } catch(err) {
+        console.error('Full error:', err);
+        console.error('Response status:', res?.status);
         apiError.textContent = err.message || 'Something went wrong. Please try again.';
         apiError.classList.add('show');
         btn.classList.remove('loading');
         btn.disabled = false;
     }
 }
-
 </script>
 </body>
 </html>

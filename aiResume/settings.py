@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'resumeApp',
     'rest_framework',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -34,6 +35,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'aiResume.urls'
@@ -123,7 +125,6 @@ EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-
 EMAIL_HOST_USER =config("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD =config("EMAIL_HOST_PASSWORD")
 
@@ -139,6 +140,15 @@ EMAIL_HOST_PASSWORD =config("EMAIL_HOST_PASSWORD")
 # SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 # SECURE_HSTS_PRELOAD = True
 
-CSRF_TRUSTED_ORIGINS = [
-    "https://*.onrender.com"
+# CSRF_TRUSTED_ORIGINS = [
+#     "https://*.onrender.com"
+# ]
+
+
+CORS_ALLOWED_ORIGINS = [
+    "https://resumeiq-orn7.onrender.com/",
+    "http://localhost:8000",
 ]
+
+# If frontend and backend are same Render service, this also helps:
+CORS_ALLOW_CREDENTIALS = True
