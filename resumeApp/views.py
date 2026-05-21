@@ -41,7 +41,7 @@ class Resumeanalyzing(APIView):
     def post(self,request):
         user=request.user
         if not user.is_authenticated:
-            free_uses=request.session.get("free_uses",2)
+            free_uses=request.session.get("free_uses",1)
             if free_uses<=0:
                 return Response({"error":"Free limits over,No credits Remaining"})
         else:
@@ -303,11 +303,11 @@ class VerifyPayments(APIView):
             paid_amount = order["amount"]  # THIS IS TRUSTED (in paise)
 
             if paid_amount == 4900:
-                profile.credits += 5
+                profile.credits += 3
                 profile.plan = "starter"
 
             elif paid_amount == 9900:
-                profile.credits += 10
+                profile.credits += 5
                 profile.plan = "pro"
             profile.save()
             send_purchase_email(user)
