@@ -889,7 +889,9 @@
 
 <!-- ── HERO ── -->
 <section class="hero">
+    {% if user.is_authenticated %}
      <div class="hero-badge"><span class="dot"></span>Welcome {{request.user.username}}</div>
+    {% endif %}
     <h1>Your resume.<br><em>Sharper.</em> Smarter.<br>Ready to land.</h1>
     <p class="hero-sub">Paste a job description, upload your resume, and get a detailed score, skill gap analysis, and actionable suggestions in seconds.</p>
     <div class="hero-cta">
