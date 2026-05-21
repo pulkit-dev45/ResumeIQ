@@ -225,7 +225,7 @@ class Register(APIView):
             password=password,
             email=email
         )
-        send_welcome_email(user)
+        # send_welcome_email(user)
         return Response({"message": "Register successfully"}, status=201)
 @method_decorator(ratelimit(key='ip', rate='5/m', block=True), name='post')        
 class Login(APIView):
